@@ -4,7 +4,8 @@
     "format": "pnpm check --write",
     "prepare": "pnpm db:generate",
     "db:generate": "prisma generate",
-    "db:migrate": "prisma migrate dev --name init"
+    "db:migrate": "prisma migrate dev --name init",
+    "db:seed": "tsx prisma/seed.ts"
   },
   "volta": {
     "node": "20.16.0"
@@ -12,7 +13,9 @@
   "packageManager": "pnpm@9.4.0",
   "devDependencies": {
     "@biomejs/biome": "^1.8.3",
-    "prisma": "^5.21.1"
+    "@types/node": "^22.8.4",
+    "prisma": "^5.21.1",
+    "tsx": "^4.19.2"
   },
   "dependencies": {
     "@prisma/client": "^5.21.1"
