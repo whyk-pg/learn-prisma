@@ -8,7 +8,8 @@
 TiDB ServerlessとPrismaツール群を利用して、DB周りを楽したい
 
 ## 本リポジトリの達成目標
-- [ ] シネログのスキーマを移植し、移行ファイルを生成
+- [ ] Prismaファイル他の自動整形を追加
+- [x] シネログのスキーマを移植し、移行ファイルを生成
 - [ ] Seedデータの反映スクリプトを作成
 - [ ] HonoでREST APIを構築し、CRUDを構築
 - [ ] シネログの新しいスキーマを反映し、移行ファイルを生成
@@ -18,3 +19,4 @@ TiDB ServerlessとPrismaツール群を利用して、DB周りを楽したい
 - [cinelog/db at main · windchime-yk/cinelog](https://github.com/windchime-yk/cinelog/tree/main/db)
 - [Prisma | Next-generation ORM for Node.js & TypeScript](https://www.prisma.io/orm)
 - [Prisma Accelerate | Make your database queries faster](https://www.prisma.io/data-platform/accelerate)
+- [Connect to TiDB with Prisma | TiDB Docs](https://docs.pingcap.com/tidbcloud/dev-guide-sample-application-nodejs-prisma)
