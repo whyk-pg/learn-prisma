@@ -16,19 +16,23 @@ datasource db {
 model Movie {
   id                Int      @id @unique @default(autoincrement())
   title             String   @db.VarChar(246)
-  isDubbed          Boolean  @map("is_dubbed")
-  isDomestic        Boolean  @map("is_domestic")
-  isLiveAction      Boolean  @map("is_live_action")
+  isSubtitles       Boolean  @map("is_subtitles")
   theaterId         Int      @map("theater_id")
+  createrCountryId  Int      @map("creater_country_id")
+  movieFormatId     Int      @map("movie_format_id")
+  screeningFormatId Int      @map("screening_format_id")
   viewStartDatetime DateTime @map("view_start_datetime")
   viewEndDatetime   DateTime @map("view_end_datetime")
-  accompanier       Int?
+  companionsCount   Int?     @map("companions_count")
   rating            Int?
   comment           String?  @db.Text
 
-  theater Theater @relation(fields: [theaterId], references: [id])
+  theater         Theater         @relation(fields: [theaterId], references: [id])
+  createrCountry  CreaterCountry  @relation(fields: [createrCountryId], references: [id])
+  movieFormat     MovieFormat     @relation(fields: [movieFormatId], references: [id])
+  screeningFormat ScreeningFormat @relation(fields: [screeningFormatId], references: [id])
 
-  @@map("tbl_movieinfo")
+  @@map("movies")
 }
 
 model Theater {
@@ -37,5 +41,32 @@ model Theater {
 
   movies Movie[]
 
-  @@map("tbl_theater")
+  @@map("theaters")
+}
+
+model CreaterCountry {
+  id   Int    @id @unique @default(autoincrement())
+  name String @unique @db.VarChar(246)
+
+  movies Movie[]
+
+  @@map("creaters_countries")
+}
+
+model MovieFormat {
+  id   Int    @id @unique @default(autoincrement())
+  name String @unique @db.VarChar(246)
+
+  movies Movie[]
+
+  @@map("movie_formats")
+}
+
+model ScreeningFormat {
+  id   Int    @id @unique @default(autoincrement())
+  name String @unique @db.VarChar(246)
+
+  movies Movie[]
+
+  @@map("screening_formats")
 }
