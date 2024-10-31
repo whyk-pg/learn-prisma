@@ -22,7 +22,7 @@ async function main() {
     data: {
       name: "IMAX",
     },
-  })
+  });
   await client.movie.create({
     data: {
       title: "The Shawshank Redemption",
