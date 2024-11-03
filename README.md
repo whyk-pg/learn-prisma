@@ -13,6 +13,7 @@ TiDB ServerlessとPrismaツール群を利用して、DB周りを楽したい
 - [x] Seedデータの反映スクリプトを作成
 - [x] シネログの新しいスキーマを反映し、移行ファイルを生成
 - [x] HonoでREST APIを構築し、CRUDを構築
+- [x] Remixでアプリケーションを構築し、REST APIを利用
 - [ ] Prisma Accelerateを適用
 
 ## 参考資料

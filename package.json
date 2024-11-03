@@ -1,7 +1,16 @@
 {
+  "private": true,
+  "sideEffects": false,
+  "type": "module",
   "scripts": {
-    "dev": "wrangler dev",
-    "deploy": "wrangler deploy --minify",
+    "dev": "remix vite:dev",
+    "build": "remix vite:build",
+    "deploy": "pnpm run build && wrangler pages deploy",
+    "start": "wrangler pages dev ./build/client",
+    "typecheck": "tsc",
+    "typegen": "wrangler types",
+    "preview": "pnpm run build && wrangler pages dev",
+    "cf-typegen": "wrangler types",
     "check": "biome check --unsafe .",
     "format": "pnpm check --write",
     "prepare": "pnpm db:generate",
@@ -16,15 +25,32 @@
   "devDependencies": {
     "@biomejs/biome": "^1.8.3",
     "@cloudflare/workers-types": "^4.20241022.0",
+    "@hono/vite-dev-server": "^0.16.0",
+    "@remix-run/dev": "^2.13.1",
     "@types/node": "^22.8.4",
+    "@types/react": "^18.2.20",
+    "@types/react-dom": "^18.2.7",
+    "autoprefixer": "^10.4.19",
+    "hono-remix-adapter": "^0.3.0",
+    "postcss": "^8.4.38",
     "prisma": "^5.21.1",
+    "tailwindcss": "^3.4.4",
     "tsx": "^4.19.2",
+    "typescript": "^5.1.6",
+    "vite": "^5.1.0",
+    "vite-tsconfig-paths": "^4.2.1",
     "wrangler": "^3.83.0"
   },
   "dependencies": {
     "@prisma/client": "^5.21.1",
+    "@remix-run/cloudflare": "^2.13.1",
+    "@remix-run/cloudflare-pages": "^2.13.1",
+    "@remix-run/react": "^2.13.1",
     "@tidbcloud/prisma-adapter": "^5.20.0",
     "@tidbcloud/serverless": "^0.2.0",
-    "hono": "^4.6.8"
+    "hono": "^4.6.8",
+    "isbot": "^4.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }
