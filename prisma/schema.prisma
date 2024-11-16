@@ -5,7 +5,7 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["driverAdapters"]
 }
 
@@ -15,13 +15,14 @@ datasource db {
 }
 
 model Movie {
-  id                Int      @id @unique @default(autoincrement())
+  moviePk           Int      @id @unique @default(autoincrement()) @map("movie_pk")
+  id                String   @db.Char(26)
   title             String   @db.VarChar(246)
   isSubtitles       Boolean  @map("is_subtitles")
-  theaterId         Int      @map("theater_id")
-  createrCountryId  Int      @map("creater_country_id")
-  movieFormatId     Int      @map("movie_format_id")
-  screeningFormatId Int      @map("screening_format_id")
+  theaterId         String   @map("theater_id") @db.Char(26)
+  createrCountryId  String   @map("creater_country_id") @db.Char(26)
+  movieFormatId     String   @map("movie_format_id") @db.Char(26)
+  screeningFormatId String   @map("screening_format_id") @db.Char(26)
   viewStartDatetime DateTime @map("view_start_datetime")
   viewEndDatetime   DateTime @map("view_end_datetime")
   companionsCount   Int?     @map("companions_count")
@@ -37,8 +38,9 @@ model Movie {
 }
 
 model Theater {
-  id   Int    @id @unique @default(autoincrement())
-  name String @unique @db.VarChar(246)
+  theaterPk Int    @id @unique @default(autoincrement()) @map("theater_pk")
+  id        String @unique @db.Char(26)
+  name      String @unique @db.VarChar(246)
 
   movies Movie[]
 
@@ -46,8 +48,9 @@ model Theater {
 }
 
 model CreaterCountry {
-  id   Int    @id @unique @default(autoincrement())
-  name String @unique @db.VarChar(246)
+  createrCountryPk Int    @id @unique @default(autoincrement()) @map("creater_country_pk")
+  id               String @unique @db.Char(26)
+  name             String @unique @db.VarChar(246)
 
   movies Movie[]
 
@@ -55,8 +58,9 @@ model CreaterCountry {
 }
 
 model MovieFormat {
-  id   Int    @id @unique @default(autoincrement())
-  name String @unique @db.VarChar(246)
+  movieFormatPk Int    @id @unique @default(autoincrement()) @map("movie_format_pk")
+  id            String @unique @db.Char(26)
+  name          String @unique @db.VarChar(246)
 
   movies Movie[]
 
@@ -64,8 +68,9 @@ model MovieFormat {
 }
 
 model ScreeningFormat {
-  id   Int    @id @unique @default(autoincrement())
-  name String @unique @db.VarChar(246)
+  screeningFormatPk Int    @id @unique @default(autoincrement()) @map("screening_format_pk")
+  id                String @unique @db.Char(26)
+  name              String @unique @db.VarChar(246)
 
   movies Movie[]
 

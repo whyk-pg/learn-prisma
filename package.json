@@ -46,6 +46,7 @@
     "@remix-run/cloudflare": "^2.13.1",
     "@remix-run/cloudflare-pages": "^2.13.1",
     "@remix-run/react": "^2.13.1",
+    "@std/ulid": "npm:@jsr/std__ulid@1.0.0-rc.4",
     "@tidbcloud/prisma-adapter": "^5.20.0",
     "@tidbcloud/serverless": "^0.2.0",
     "hono": "^4.6.8",

@@ -1,4 +1,4 @@
-import { defaultOptions} from '@hono/vite-dev-server';
+import { defaultOptions } from "@hono/vite-dev-server";
 import adapter from "@hono/vite-dev-server/cloudflare";
 import {
   vitePlugin as remix,
@@ -30,7 +30,12 @@ export default defineConfig({
     serverAdapter({
       adapter,
       entry: "./server/index.ts",
-      exclude: [...defaultOptions.exclude, '/assets/**', '/app/**', "/public/**"],
+      exclude: [
+        ...defaultOptions.exclude,
+        "/assets/**",
+        "/app/**",
+        "/public/**",
+      ],
     }),
     tsconfigPaths(),
   ],
