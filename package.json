@@ -14,7 +14,7 @@
     "check": "biome check --unsafe .",
     "format": "pnpm check --write",
     "prepare": "pnpm db:generate",
-    "db:generate": "prisma generate",
+    "db:generate": "prisma generate --no-engine",
     "db:migrate": "prisma migrate dev --name init",
     "db:seed": "tsx prisma/seed.ts"
   },
@@ -43,6 +43,7 @@
   },
   "dependencies": {
     "@prisma/client": "^5.21.1",
+    "@prisma/extension-accelerate": "^1.2.1",
     "@remix-run/cloudflare": "^2.13.1",
     "@remix-run/cloudflare-pages": "^2.13.1",
     "@remix-run/react": "^2.13.1",

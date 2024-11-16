@@ -1,9 +1,6 @@
-import { PrismaClient } from "@prisma/client";
-import { PrismaTiDBCloud } from "@tidbcloud/prisma-adapter";
-import { connect } from "@tidbcloud/serverless";
+import { PrismaClient } from "@prisma/client/edge";
+import { withAccelerate } from "@prisma/extension-accelerate";
 
-export const setupPrisma = (url: string) => {
-  const connection = connect({ url });
-  const adapter = new PrismaTiDBCloud(connection);
-  return new PrismaClient({ adapter });
+export const setupPrisma = () => {
+  return new PrismaClient().$extends(withAccelerate());
 };

@@ -1,7 +1,7 @@
 import { ulid } from "@std/ulid";
 import { Hono } from "hono";
 import { setupPrisma } from "../prisma";
-const app = new Hono<{ Bindings: { DATABASE_URL: string } }>();
+const app = new Hono();
 
 const BASE_PATH = "/api";
 
@@ -11,7 +11,7 @@ const routes = app
   })
   .get(`${BASE_PATH}/movie/:id`, async (c) => {
     const id = c.req.param("id");
-    const prisma = setupPrisma(c.env.DATABASE_URL);
+    const prisma = setupPrisma();
 
     const movie = await prisma.movie.findFirst({
       where: {
@@ -39,6 +39,9 @@ const routes = app
           },
         },
       },
+      cacheStrategy: {
+        ttl: 60,
+      },
     });
 
     if (!movie) {
@@ -48,7 +51,7 @@ const routes = app
     return c.json(movie);
   })
   .get(`${BASE_PATH}/movies`, async (c) => {
-    const prisma = setupPrisma(c.env.DATABASE_URL);
+    const prisma = setupPrisma();
 
     const movies = await prisma.movie.findMany({
       include: {
@@ -73,6 +76,9 @@ const routes = app
           },
         },
       },
+      cacheStrategy: {
+        ttl: 60,
+      },
     });
 
     return c.json(movies);
@@ -91,7 +97,7 @@ const routes = app
       rating: number | null;
       comment: string | null;
     }>();
-    const prisma = setupPrisma(c.env.DATABASE_URL);
+    const prisma = setupPrisma();
 
     const movie = await prisma.movie.create({
       data: {
@@ -114,7 +120,7 @@ const routes = app
   })
   .patch(`${BASE_PATH}/movie/:id`, async (c) => {
     const id = c.req.param("id");
-    const prisma = setupPrisma(c.env.DATABASE_URL);
+    const prisma = setupPrisma();
 
     const sorceMovie = await prisma.movie.findFirst({
       where: {
@@ -136,7 +142,7 @@ const routes = app
   })
   .delete(`${BASE_PATH}/movie/:id`, async (c) => {
     const id = c.req.param("id");
-    const prisma = setupPrisma(c.env.DATABASE_URL);
+    const prisma = setupPrisma();
 
     const sorceMovie = await prisma.movie.findFirst({
       where: {
@@ -154,28 +160,28 @@ const routes = app
     return c.json(movie);
   })
   .get(`${BASE_PATH}/theaters`, async (c) => {
-    const prisma = setupPrisma(c.env.DATABASE_URL);
+    const prisma = setupPrisma();
 
     const theaters = await prisma.theater.findMany();
 
     return c.json(theaters);
   })
   .get(`${BASE_PATH}/creaters_countries`, async (c) => {
-    const prisma = setupPrisma(c.env.DATABASE_URL);
+    const prisma = setupPrisma();
 
     const createrCountries = await prisma.createrCountry.findMany();
 
     return c.json(createrCountries);
   })
   .get(`${BASE_PATH}/movie_formats`, async (c) => {
-    const prisma = setupPrisma(c.env.DATABASE_URL);
+    const prisma = setupPrisma();
 
     const movieFormats = await prisma.movieFormat.findMany();
 
     return c.json(movieFormats);
   })
   .get(`${BASE_PATH}/screening_formats`, async (c) => {
-    const prisma = setupPrisma(c.env.DATABASE_URL);
+    const prisma = setupPrisma();
 
     const screeningFormats = await prisma.screeningFormat.findMany();
 
