@@ -1,5 +1,7 @@
+import { zValidator } from "@hono/zod-validator";
 import { ulid } from "@std/ulid";
 import { Hono } from "hono";
+import { z } from "zod";
 import { setupPrisma } from "../prisma";
 const app = new Hono();
 
@@ -118,28 +120,42 @@ const routes = app
 
     return c.json(movie);
   })
-  .patch(`${BASE_PATH}/movie/:id`, async (c) => {
-    const id = c.req.param("id");
-    const prisma = setupPrisma();
+  .patch(
+    `${BASE_PATH}/movie/:id`,
+    zValidator(
+      "json",
+      z.object({
+        title: z.string(),
+      }),
+    ),
+    async (c, next) => {
+      const id = c.req.param("id");
+      const body = c.req.valid("json");
+      const prisma = setupPrisma();
 
-    const sorceMovie = await prisma.movie.findFirst({
-      where: {
-        id,
-      },
-    });
+      console.log({ id, body });
 
-    const movie = await prisma.movie.update({
-      where: {
-        moviePk: sorceMovie?.moviePk,
-        id,
-      },
-      data: {
-        title: "The Godfather",
-      },
-    });
+      const sorceMovie = await prisma.movie.findFirst({
+        where: {
+          id,
+        },
+      });
 
-    return c.json(movie);
-  })
+      console.log({ sorceMovie });
+
+      await prisma.movie.update({
+        where: {
+          moviePk: sorceMovie?.moviePk,
+          id,
+        },
+        data: {
+          title: body.title,
+        },
+      });
+      console.log(body);
+      await next();
+    },
+  )
   .delete(`${BASE_PATH}/movie/:id`, async (c) => {
     const id = c.req.param("id");
     const prisma = setupPrisma();

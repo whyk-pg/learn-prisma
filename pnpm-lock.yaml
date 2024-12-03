@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@hono/zod-validator':
+        specifier: ^0.4.1
+        version: 0.4.1(hono@4.6.8)(zod@3.23.8)
       '@prisma/client':
         specifier: ^5.21.1
         version: 5.21.1(prisma@5.21.1)
@@ -44,6 +47,9 @@ importers:
       react-dom:
         specifier: ^18.2.0
         version: 18.3.1(react@18.3.1)
+      zod:
+        specifier: ^3.23.8
+        version: 3.23.8
     devDependencies:
       '@biomejs/biome':
         specifier: ^1.8.3
@@ -928,6 +934,12 @@ packages:
         optional: true
       wrangler:
         optional: true
+
+  '@hono/zod-validator@0.4.1':
+    resolution: {integrity: sha512-I8LyfeJfvVmC5hPjZ2Iij7RjexlgSBT7QJudZ4JvNPLxn0JQ3sqclz2zydlwISAnw21D2n4LQ0nfZdoiv9fQQA==}
+    peerDependencies:
+      hono: '>=3.9.0'
+      zod: ^3.19.1
 
   '@isaacs/cliui@8.0.2':
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
@@ -3922,6 +3934,11 @@ snapshots:
     optionalDependencies:
       miniflare: 3.20241022.0
       wrangler: 3.83.0(@cloudflare/workers-types@4.20241022.0)
+
+  '@hono/zod-validator@0.4.1(hono@4.6.8)(zod@3.23.8)':
+    dependencies:
+      hono: 4.6.8
+      zod: 3.23.8
 
   '@isaacs/cliui@8.0.2':
     dependencies:
